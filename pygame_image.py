@@ -18,6 +18,8 @@ def main():
     pc_rct.center = 300, 200
     tmr = 0
     x = tmr
+    pcx = 0
+    pcy = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
@@ -26,16 +28,20 @@ def main():
         screen.blit(bg_img2, [-x+1600, 0])
         screen.blit(bg_img, [-x+3200, 0])
 
-        pc_rct.move_ip(-1, 0)            
+        pc_rct.move_ip(-1+pcx, pcy)            
         key_lst = pg.key.get_pressed()  
         if key_lst[pg.K_UP]:
-            pc_rct.move_ip(0, -1)
+            pcy = -1
+        else:
+            pcy = 0
         if key_lst[pg.K_DOWN]:
-            pc_rct.move_ip(0, +1)
+            pcy = 1
         if key_lst[pg.K_LEFT]:
-            pc_rct.move_ip(-1, 0)
+            pcx = -1
+        else:
+            pcx = 0
         if key_lst[pg.K_RIGHT]:
-            pc_rct.move_ip(+2, 0)
+            pcx = +2
         screen.blit(pc_img, pc_rct)
         pg.display.update()
         tmr += 1
